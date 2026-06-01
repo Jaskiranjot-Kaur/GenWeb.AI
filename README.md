@@ -26,13 +26,13 @@ GenWeb.AI/
 
 ## Environment Variables
 
-### Client (`/tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/client/.env`)
+### Client (`client/.env`)
 
 ```bash
 VITE_FIREBASE_API_KEY=your_firebase_api_key
 ```
 
-### Server (`/tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/server/.env`)
+### Server (`server/.env`)
 
 ```bash
 PORT=8000
@@ -46,21 +46,21 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 ### 1) Install dependencies
 
 ```bash
-cd /tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/client && npm install
-cd /tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/server && npm install
+cd client && npm install
+cd ../server && npm install
 ```
 
 ### 2) Start backend
 
 ```bash
-cd /tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/server
+cd server
 npm run dev
 ```
 
 ### 3) Start frontend
 
 ```bash
-cd /tmp/workspace/Jaskiranjot-Kaur/GenWeb.AI/client
+cd client
 npm run dev
 ```
 
