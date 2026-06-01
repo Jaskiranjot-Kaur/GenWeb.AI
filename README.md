@@ -45,9 +45,11 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 
 ### 1) Install dependencies
 
+From the repository root:
+
 ```bash
-cd client && npm install
-cd ../server && npm install
+(cd client && npm install)
+(cd server && npm install)
 ```
 
 ### 2) Start backend
