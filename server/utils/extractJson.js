@@ -8,10 +8,17 @@ const extractJson = async (text) => {
     .trim();
 
   const firstBrace = cleaned.indexOf("{");
-  const closeBrace = cleaned.indexOf("}");
-  if (firstBrace === -1 || closeBrace === -1) return null;
-  const jsonString = cleaned.slice(firstBrace, closeBrace + 1);
-  return JSON.parse(jsonString);
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace <= firstBrace) {
+    return null;
+  }
+
+  const jsonString = cleaned.slice(firstBrace, lastBrace + 1);
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    return null;
+  }
 };
 
 export default extractJson;

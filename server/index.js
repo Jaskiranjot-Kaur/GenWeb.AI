@@ -7,6 +7,7 @@ import authRouter from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user.routes.js";
+import websiteRouter from "./routes/websiteRoutes.js";
 
 const app = express(); //to use all methods of express (app is an instance of express)
 const port = process.env.PORT || 5000; //iss port pe chlega
@@ -19,7 +20,7 @@ app.use(
     origin: "http://localhost:5173",
     credentials: true, //token not found wale error na aaye
     //http://localhost:3000 se request aayegi toh allow karna hai, aur credentials true isliye ki token cookie me store hoga
-  })
+  }),
 );
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

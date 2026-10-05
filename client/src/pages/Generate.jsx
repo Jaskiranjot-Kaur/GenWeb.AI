@@ -1,24 +1,43 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
-import axios from "axios"
-
+import axios from "axios";
+import { serverUrl } from "../App";
 
 function Generate() {
   const navigate = useNavigate();
   const [prompt, setPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleGenerateWebsite = async() => {
+  const handleGenerateWebsite = async () => {
     try {
-      const result = await axios.post( )
+      setIsGenerating(true);
+      setError("");
+      const result = await axios.post(
+        `${serverUrl}/api/website/generate`,
+        { prompt },
+        { withCredentials: true },
+      );
+      console.log(result);
+      if (result.data?.websiteId) {
+        navigate(`/editor/${result.data.websiteId}`);
+      }
+    } catch (err) {
+      const message = err.response?.data?.message || err.message;
+      setError(message);
+      console.log("Error: ", message);
+    } finally {
+      setIsGenerating(false);
     }
-  }
+  };
   return (
     <div className="min-h-screen bg-linear-to-br from-[#050505] via-[#0b0b0b] to-[#050505] text-white">
       <div className="sticky top-0 z-40 backdrop-blur-xl bg-black/50 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex item-center gap-4">
+          <div className="flex items-center gap-4">
             <button
               className="p-2 rounded-lg hover:bg-white/10 transition"
               onClick={() => navigate("/")}
@@ -41,7 +60,7 @@ function Generate() {
         <motion.div>
           <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight">
             Build Websites with
-            <span className="block bg-linear-to-r from-white to zinc-400 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-white to-zinc-400 bg-clip-text text-transparent">
               Real AI Power
             </span>
           </h1>
@@ -51,7 +70,7 @@ function Generate() {
           </p>
         </motion.div>
         <div className="mb-14 text-left my-16">
-          <h1 className="text-x font-semibold mb-2">Describe your website</h1>
+          <h1 className="text-sm font-semibold mb-2">Describe your website</h1>
           <div className="relative">
             <textarea
               onChange={(e) => setPrompt(e.target.value)}
@@ -66,10 +85,13 @@ function Generate() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
             className="px-4 py-4 rounded-2xl font-semibold text-lg bg-white text-black"
+            onClick={handleGenerateWebsite}
+            disabled={!prompt.trim() || isGenerating}
           >
-            Generate Website
+            {isGenerating ? "Generating..." : "Generate Website"}
           </motion.button>
         </div>
+        {error ? <p className="mt-4 text-sm text-red-400">{error}</p> : null}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Generate from "./pages/Generate";
+import WebsiteEditor from "./pages/WebsiteEditor";
 
 function App() {
   useGetCurrentUser();
@@ -14,12 +15,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" elem ent={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
           element={userData ? <Dashboard /> : <Home />}
         />
         <Route path="/generate" element={userData ? <Generate /> : <Home />} />
+        <Route
+          path="/editor/:id"
+          element={userData ? <WebsiteEditor /> : <Home />}
+        />
       </Routes>
     </Router>
   );

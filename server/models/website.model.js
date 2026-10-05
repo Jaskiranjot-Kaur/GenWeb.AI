@@ -12,7 +12,7 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const websiteSchema = new mongoose.Schema(
@@ -31,7 +31,8 @@ const websiteSchema = new mongoose.Schema(
       required: true,
     },
     conversation: {
-      messageSchema,
+      type: [messageSchema],
+      default: [],
     },
     deployed: {
       type: Boolean,
@@ -43,10 +44,11 @@ const websiteSchema = new mongoose.Schema(
     slug: {
       type: String,
       unique: true,
+      sparse: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const Website = mongoose.Model("Website", websiteSchema); 
+const Website = mongoose.model("Website", websiteSchema);
 export default Website;

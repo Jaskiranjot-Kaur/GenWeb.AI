@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import LoginModel from "./components/loginModel.jsx";
+import LoginModel from "../components/loginModel.jsx";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Coins } from "lucide-react";
@@ -74,10 +74,11 @@ function Home() {
                 >
                   <img
                     src={
-                      userData.avatar ||
+                      userData?.avatar ||
                       `https://ui-avatars.com/api/?name=${userData.name}`
                     }
                     alt=""
+                    referrerPolicy="no-referrer"
                     className="w-9 h-9 rounded-full border border-white/20 object-cover"
                   />
                 </button>
