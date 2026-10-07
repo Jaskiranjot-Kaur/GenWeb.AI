@@ -1,14 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
   authDomain: "genwebai-1cf42.firebaseapp.com",
   projectId: "genwebai-1cf42",
   storageBucket: "genwebai-1cf42.firebasestorage.app",
@@ -17,9 +12,24 @@ const firebaseConfig = {
   measurementId: "G-VD0KPTQ9ZE",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+let auth = null;
+let provider = null;
+
+try {
+  if (!firebaseConfig.apiKey) {
+    throw new Error(
+      "Firebase API key is missing. Add VITE_FIREBASE_API_KEY to client/.env",
+    );
+  }
+
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  provider = new GoogleAuthProvider();
+} catch (error) {
+  console.warn(
+    "Firebase auth is disabled because the API key is missing or invalid:",
+    error.message,
+  );
+}
 
 export { auth, provider };

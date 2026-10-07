@@ -10,6 +10,14 @@ import { setUserData } from "../redux/userSlice.js";
 function LoginModel({ open, onClose }) {
   const dispatch = useDispatch();
   const handleGoogleAuth = async () => {
+    if (!auth || !provider) {
+      console.warn(
+        "Google login is unavailable because Firebase is not configured.",
+      );
+      onClose();
+      return;
+    }
+
     try {
       const result = await signInWithPopup(auth, provider);
       //fetch and axios dono use kr sakte hain
