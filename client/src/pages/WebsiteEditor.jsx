@@ -108,7 +108,7 @@ function WebsiteEditor() {
   return (
     <div className="h-screen w-screen flex bg-black text-white overflow-hidden">
       <aside className="hidden lg:flex w-95 flex-col border-r border-white/10 bg-black/80">
-        <Header />
+        <Header onclose={() => setShowChat(false)} />
         <>
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
             {messages.map((m, i) => (
@@ -300,10 +300,15 @@ function WebsiteEditor() {
     </div>
   );
 
-  function Header() {
+  function Header({ onclose }) {
     return (
       <div className="h-14 px-4 flex items-center justify-between border-b border-white/10">
         <span className="font-semibold truncate">{website.title}</span>
+        {onclose && (
+          <button onClick={onclose}>
+            <X size={18} color="white" />
+          </button>
+        )}
       </div>
     );
   }
