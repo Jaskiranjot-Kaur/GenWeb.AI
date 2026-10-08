@@ -13,6 +13,7 @@ const app = express(); //to use all methods of express (app is an instance of ex
 const port = process.env.PORT || 5000; //iss port pe chlega
 
 //middleware
+app.set("trust proxy", 1);
 app.use(express.json()); // to parse json data from request body
 app.use(cookieParser());
 app.use(

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 export const googleAuth = async (req, res) => {
   try {
     const { name, email, avatar } = req.body;
+    const isProduction = process.env.NODE_ENV === "production";
     if (!email) {
       return res.status(400).json({
         message: "Email is required",
@@ -19,8 +20,8 @@ export const googleAuth = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days (in ms)
     });
     return res.status(200).json(user);
@@ -33,10 +34,11 @@ export const googleAuth = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
+    const isProduction = process.env.NODE_ENV === "production";
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
     });
 
     return res.status(200).json({ message: "Logged out successfully" });
