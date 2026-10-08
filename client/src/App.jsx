@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// export const serverUrl = "https://genweb-ai-rl4y.onrender.com";
-export const serverUrl = "http://localhost:8000";
+export const serverUrl = "https://genweb-ai-rl4y.onrender.com";
+// export const serverUrl = "http://localhost:8000";
 import Home from "./pages/Home";
 import useGetCurrentUser from "./hooks/useGetCurrentUser";
 import { useSelector } from "react-redux";
