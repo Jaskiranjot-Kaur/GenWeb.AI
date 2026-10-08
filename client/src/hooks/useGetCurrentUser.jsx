@@ -3,7 +3,8 @@ import { setUserData } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
-const serverUrl = "https://genweb-ai-rl4y.onrender.com";
+// const serverUrl = "https://genweb-ai-rl4y.onrender.com";
+const serverUrl = "http://localhost:8000";
 
 function useGetCurrentUser() {
   const dispatch = useDispatch();
