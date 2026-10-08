@@ -17,7 +17,7 @@ app.use(express.json()); // to parse json data from request body
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ai-website-builder-khaki-iota.vercel.app",
     credentials: true, //token not found wale error na aaye
     //http://localhost:3000 se request aayegi toh allow karna hai, aur credentials true isliye ki token cookie me store hoga
   }),
