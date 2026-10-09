@@ -151,7 +151,9 @@ function Home() {
 
         <button
           className="mt-12 px-10 py-4 rounded-xl bg-white text-black font-semibold hover:scale-105 transition"
-          onClick={() => navigate("/dashboard")}
+          onClick={
+            userData ? () => navigate("/dashboard") : () => setOpenLogin(true)
+          }
         >
           {userData ? "Go to dashboard" : "Get Started"}
         </button>
