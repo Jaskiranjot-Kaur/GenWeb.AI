@@ -23,6 +23,14 @@ app.use(
     //http://localhost:3000 se request aayegi toh allow karna hai, aur credentials true isliye ki token cookie me store hoga
   }),
 );
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true, //token not found wale error na aaye
+//   }),
+// );
+
+// app.use(cors());
 
 app.get("/health", (req, res) => {
   return res.status(200).json({ success: true, message: "okay" });
